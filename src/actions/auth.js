@@ -26,3 +26,9 @@ export const confirm = token => dispatch =>
     localStorage.bookwormJWT = user.token;
     dispatch(userLoggedIn(user));
   });
+
+export const resetPasswordRequest = data => () => api.user.resetPasswordRequest(data.email);
+
+export const validateToken = token => () => api.user.validateToken(token);
+
+export const resetPassword = data => () => api.user.resetPassword(data);
