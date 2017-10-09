@@ -7,14 +7,19 @@ import ConfirmationPage from './components/pages/ConfirmationPage';
 import DashboardPage from './components/pages/DashboardPage';
 import ForgotPasswordPage from './components/pages/ForgotPasswordPage';
 import ResetPasswordPage from './components/pages/ResetPasswordPage';
+import NewBookPage from './components/pages/NewBookPage';
+import TopNavigation from './components/navigation/TopNavigation';
 
 import UserRoute from './components/routes/UserRoute';
 import GuestRoute from './components/routes/GuestRoute';
 
+import { connect } from 'react-redux';
+
 // WHEN YOU CONNECT COMPONENTS TO REDUX YOU GET BLOCKERS
 // LOCATION ALLOWS THE COMPONENT TO RENDER
-const App = ({ location }) => (
+const App = ({ location, isAuthenticated }) => (
   <div className="ui container">
+    {isAuthenticated && <TopNavigation />}
     <Route location={location} path="/" exact component={HomePage} />
     <Route location={location} path="/confirmation/:token" exact component={ConfirmationPage} />
     <GuestRoute location={location} path="/login" exact component={LoginPage} />
@@ -27,7 +32,14 @@ const App = ({ location }) => (
     <GuestRoute location={location} path="/forgot_password" exact component={ForgotPasswordPage} />
     <GuestRoute location={location} path="/signup" exact component={SignupPage} />
     <UserRoute location={location} path="/dashboard" exact component={DashboardPage} />
+    <UserRoute location={location} path="/books/new" exact component={NewBookPage} />
   </div>
 );
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: !!state.user.email
+  };
+}
+
+export default connect(mapStateToProps)(App);
