@@ -9,7 +9,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <h1>LoginPage</h1>
+        <h1>Access your account</h1>
         <LoginForm submit={this.submit} />
       </div>
     );
