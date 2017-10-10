@@ -11,6 +11,7 @@ import rootReducer from './rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { userLoggedIn } from './actions/auth';
 import decode from 'jwt-decode';
+import setAuthHeader from './utils/setAuthHeader';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
@@ -22,6 +23,7 @@ if (localStorage.bookwormJWT) {
     confirmed: payload.confirmed
   };
 
+  setAuthHeader(localStorage.bookwormJWT);
   store.dispatch(userLoggedIn(user));
 }
 

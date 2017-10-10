@@ -108,6 +108,7 @@ class BookForm extends Component {
                     id="pages"
                     name="pages"
                     value={data.pages}
+                    placeholder="#"
                     onChange={this.onChangeNumber}
                   />
                   {errors.pages && <InlineError text={errors.pages} />}
